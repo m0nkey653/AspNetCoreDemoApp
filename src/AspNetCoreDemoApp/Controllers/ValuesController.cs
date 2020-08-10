@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,6 +22,7 @@ namespace AspNetCoreDemoApp.Controllers
             foreach (var i in env.Keys)
             {
                 Console.WriteLine("ENVIRONMENT: " + i.ToString() + ": " + env[i]);
+                HttpContext.Response.WriteAsync("ENVIRONMENT: " + i.ToString() + ": " + env[i]);
             }
 
 			return new[] { "value1", "value2" };
