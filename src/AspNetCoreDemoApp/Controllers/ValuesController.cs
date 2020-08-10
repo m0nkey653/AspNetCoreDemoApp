@@ -15,6 +15,14 @@ namespace AspNetCoreDemoApp.Controllers
 		    Console.WriteLine(Request.GetDisplayUrl());
 		    Console.WriteLine(Request.GetEncodedUrl());
 
+            var env = Environment.GetEnvironmentVariables();
+
+            Console.WriteLine("ENVIRONMENT COUNT: " + env.Count);
+            foreach (var i in env.Keys)
+            {
+                Console.WriteLine("ENVIRONMENT: " + i.ToString() + ": " + env[i]);
+            }
+
 			return new[] { "value1", "value2" };
 		}
 
