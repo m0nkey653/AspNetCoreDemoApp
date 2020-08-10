@@ -19,13 +19,16 @@ namespace AspNetCoreDemoApp.Controllers
             var env = Environment.GetEnvironmentVariables();
 
             Console.WriteLine("ENVIRONMENT COUNT: " + env.Count);
+            List<string> envVars = new List<string>();
             foreach (var i in env.Keys)
             {
                 Console.WriteLine("ENVIRONMENT: " + i.ToString() + ": " + env[i]);
-                HttpContext.Response.WriteAsync("ENVIRONMENT: " + i.ToString() + ": " + env[i]);
+                envVars.Add("ENVIRONMENT: " + i.ToString() + ": " + env[i]);
+                //HttpContext.Response.WriteAsync("ENVIRONMENT: " + i.ToString() + ": " + env[i]);
             }
+            return envVars;
 
-			return new[] { "value1", "value2" };
+			//return new[] { "value1", "value2" };
 		}
 
 		// GET api/values/5
