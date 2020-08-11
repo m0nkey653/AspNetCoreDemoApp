@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
@@ -20,22 +21,23 @@ namespace AspNetCoreDemoApp.Controllers
 
             Console.WriteLine("Current Directory: " + System.IO.Directory.GetCurrentDirectory());
 
-            var directory = new System.IO.DirectoryInfo("/app/contrast/runtimes/linux-x64/native/");
-            if (directory == null)
+            try
             {
-                Console.Write("profiler directory: NULL");
-                envVars.Add("profiler directory: NULL");
-            }
-            else
-            {
-                Console.WriteLine("profiler directory count: " + directory.GetFiles().Length);
-                envVars.Add("profiler directory count: " + directory.GetFiles().Length);
+                string[] allfiles = Directory.GetFiles("/app", "*.*", SearchOption.AllDirectories);
 
-                foreach(var x in directory.GetFiles())
+                Console.WriteLine("All Files count: " + allfiles.Length);
+                envVars.Add("All Files count: " + allfiles.Length);
+
+                foreach (var x in allfiles)
                 {
-                    Console.WriteLine(" - profiler directory: " + x.FullName);
-                    envVars.Add(" - profiler directory: " + x.FullName);
+                    Console.WriteLine(" - " + x);
+                    envVars.Add(" - " + x);
                 }
+            }
+            catch(Exception ex)
+            {
+                Console.Write("All Files Exception: " + ex.ToString());
+                envVars.Add("All Files Exception: " + ex.ToString());
             }
 
             //Get environment
