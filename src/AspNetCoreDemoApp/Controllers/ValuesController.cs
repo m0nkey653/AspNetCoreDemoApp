@@ -23,7 +23,7 @@ namespace AspNetCoreDemoApp.Controllers
 
             try
             {
-                string[] allfiles = Directory.GetFiles("/app", "*.*", SearchOption.AllDirectories);
+                string[] allfiles = Directory.GetFiles("/app/heroku_output", "*.*", SearchOption.AllDirectories);
 
                 Console.WriteLine("All Files count: " + allfiles.Length);
                 envVars.Add("All Files count: " + allfiles.Length);
